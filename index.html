@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/index.css">
+
+    <script src="js/zepto.min.js"></script>
+    <script>
+        ;
+        (function (designWidth) {
+            function computeFont() {
+                // 1. 获取视口的宽度
+                let winW = document.documentElement.clientWidth;
+                if (winW >= 750) {
+                    //
+                    document.documentElement.style.fontSize = '100px';
+                    return;
+                }
+                document.documentElement.style.fontSize = winW / designWidth * 100 + 'px';
+            }
+            computeFont();
+            //窗口尺寸改变触发
+            window.addEventListener('resize', computeFont);
+            //移动端朝向改变触发
+            window.addEventListener('orientataionchange', computeFont);
+
+        })(750);
+    </script>
+</head>
+
+<body>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide swiper-slide1" id="page1">
+                <div class="quan quan1"></div>
+                <div class="quan quan2"></div>
+                <div class="quan quan3"></div>
+                <div class="box box1">shark</div>
+                <div class="box box2">男</div>
+                <div class="box box3">艺术来源于生<span class="sp">活</span></div>
+            </div>
+            <div class="swiper-slide swiper-slide2" id="page2">
+                <div class="suoming">自我介绍</div>
+                <div class="hr hr1"></div>
+                <div class="hr hr2"></div>
+                <div class="box box1"></div>
+                <div class="box box2"></div>
+                <div class="box box3"></div>
+                <div class="box box4"></div>
+                <div class="blbl">
+                    属性:男<br>
+                    特征：多动症患者，脑洞大，喜欢玩游戏，
+                    守望先锋迷<br>
+                    必杀:「 大家注意这波操作」<br>
+                    <!-- 致命伤:「」 -->
+                    微信:18730055543<br>
+                    推荐购买指数:SSS<br>
+                </div>
+            </div>
+            <div class="swiper-slide swiper-slide3" id="page3">
+                <div class="box1 ani" swiper-animate-effect="xiadi1"><span>熟练原生JS及ES6及迭代版本语法</span>
+                    <br>追求代码高质量可维护性。</div>
+                <div class="box2 ani" swiper-animate-effect="xiadi2">
+                    <span>技术栈 : Vue+Vuex+Vue-Router
+                </div>
+                <div class="box3 ani" swiper-animate-effect="xiadi3">
+                    <span>工具： Element-UI、Vant，Axios，git、npm、webpack</span>
+                    <br>
+                    熟悉 ECharts前端交互图表。
+                </div>
+                <p class="shangtian ani" swiper-animate-effect="shangtian">我的技能<br>？</p>
+                <img src="image/xiangzhi.jpg" alt="" class="ani" swiper-animate-effect="xiang">
+            </div>
+            <div class="swiper-slide swiper-slide4" id="page4">
+                <img src="image/page4bj.jpg" alt="" class="page4bj" swiper-animate-effect="xiang">
+                <div  class="blbl">This is me</div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="js/swiper.min.js"></script>
+<script>
+    console.log('如你所见，这是一个非黑即赤橙黄绿青蓝紫的世界');
+
+    $(document).on('touchstart touchmove touchend', function (ev) {
+        ev.preventDefault();
+    });
+    let boxArr = document.querySelectorAll('.swiper-slide');
+    boxArr = [...boxArr];
+
+    function pageMove() {
+        let activeIndex = this.activeIndex,
+            slides = this.slides;
+        [].forEach.call(slides, (item, index) => {
+            if (index === activeIndex) {
+                activeIndex === 0 ? activeIndex = slides.length - 2 : null;
+                activeIndex === slides.length - 1 ? activeIndex = 1 : null;
+                item.id = 'page' + activeIndex;
+                return;
+            }
+            item.id = null;
+        });
+    }
+    let mySwiper = new Swiper('.swiper-container', {
+        direction: 'vertical', // 垂直切换选项
+        loop: true, // 循环模式选项
+        on: {
+            // init: pageMove,
+            transitionEnd: pageMove
+        }
+    });
+</script>
+
+</html>
